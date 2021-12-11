@@ -43,7 +43,7 @@
                   
                     
                     <div class="form-group row">
-                        <label class="col-md-2" for="name">写真</label>
+                        <label class="col-md-2" for="image">写真</label>
                         <div class="col-md-10">
                             <input type="file" class="form-control-file" name="image">
                         </div>

@@ -9,16 +9,12 @@
                <div class="d-flex flex-row flex-wrap">
            
                        @foreach($stocks as $stock)
-
-                           
                            <div class="col-xs-6 col-sm-4 col-md-4 ">
                                <div class="mycart_box">
                                    {{$stock->name}} <br>
                                    {{$stock->price}}円<br>
-                                   <img src="/image/{{$stock->image_path}}" alt="" class="incart" >
-                                   <br>
+                                   <img src="{{ asset('storage/image/' . $stock->image_path) }}" alt="" class="incart"><br>
                                    {{$stock->detail}} <br>
-
                                    <form action="mycart" method="post">
                                        @csrf
                                        <input type="hidden" name="stock_id" value="{{ $stock->id }}">
@@ -31,7 +27,7 @@
                            </div>
                        @endforeach                    
                </div>
-               <div class="text-center" style="width: 200px;margin: 20px auto;">
+               <div class="text-center" style="width: 200px;margin: 20px auto;">#css
                {{  $stocks->links()}} 
                </div>
            </div>
