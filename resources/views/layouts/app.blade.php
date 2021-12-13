@@ -81,6 +81,28 @@
         <main class="py-4">
             @yield('content')
         </main>
+        
+        <footer class="footer_design">
+       @guest
+           <p class="nav-item" style="display:inline;">
+               <a class="nav-link" href="{{ route('login') }}" style="color:#fefefe; display:inline;">{{ __('ログイン') }}</a>
+
+           @if (Route::has('register'))
+
+                   <a class="nav-link" href="{{ route('register') }}" style="color:#fefefe; display:inline;">{{ __('会員登録') }}</a>
+               </p>
+           @endif
+       
+       @endguest
+       <br>
+       <div style="margin-top:24px;">
+        いろいろパン屋<br>
+       <p style="font-size:2.4em">オノガワパン</p><br>
+       </div>
+
+       <p style="font-size:0.7em;">@copyright</p>
+
+   </footer>
     </div>
 </body>
 </html>

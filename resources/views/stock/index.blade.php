@@ -27,7 +27,7 @@
                            </div>
                        @endforeach                    
                </div>
-               <div class="text-center" style="width: 200px;margin: 20px auto;">#css
+               <div class="text-center" style="width: 200px;margin: 20px auto;">
                {{  $stocks->links()}} 
                </div>
            </div>
