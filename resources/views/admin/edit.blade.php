@@ -8,11 +8,12 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class=box>
-            <div class="col-md-8 mx-auto">
-                <h1>編集</h1>
-                <form action="{{ action('admin\AdminTopController@update') }}" method="post" enctype="multipart/form-data">
+            <div class=box mx-auto>
+            <div class="col-md-12" style="width:600px;"> 
+                <h3>商品登録変更</h3>
+                <form action="{{ route('adminstock.update', $stock_form->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
@@ -37,7 +38,7 @@
                      <div class="form-group row">
                         <label class="col-md-2" for="price">価格</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="price" value="{{ $stock_form->price }}">
+                            <input type="text" class="form-control" style="width:150px;" name="price" value="{{ $stock_form->price }}">
                         </div>
                     </div>
                   
@@ -47,8 +48,7 @@
                             <input type="file" class="form-control-file" name="image">
                             <div class="form-text text-danger">
                                 設定中: {{ $stock_form->image_path }}
-                                {{ \Str::limit($stock_form->image, 10) }}
-                                      <img src="{{ $stock_form->image_path }}"class="rounded-circle">
+                                <img src="{{ asset('storage/image/' . $stock_form->image_path) }}"class="rounded">
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">

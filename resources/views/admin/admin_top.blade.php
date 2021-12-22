@@ -10,7 +10,11 @@
 			</div>
 			
 			<div>
-				<a href="{{ url('admin/create') }}" class="btn btn-primary">商品登録</a>
+				<a href="{{ url('adminstock/create') }}" class="btn btn-primary">商品登録</a>
+			</div>
+			
+			<div>
+				<a href="{{ url('adminstock') }}" class="btn btn-primary">登録変更</a>
 			</div>
 
 			<form method="post" action="{{ url('admin/logout') }}">

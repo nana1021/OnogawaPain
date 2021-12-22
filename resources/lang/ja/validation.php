@@ -148,7 +148,8 @@ return [
     'attributes' => [
         'name' => '商品名',
         'detail' => '商品説明',
-        'price' => '価格'
+        'price' => '価格',
+        'image_path' => '写真'
         ],
 
 ];

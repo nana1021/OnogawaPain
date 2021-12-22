@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-{{-- admin.blade.phpの@yield('title')に'ニュースの新規作成'を埋め込む --}}
+{{-- admin.blade.phpの@yield('title')にを埋め込む --}}
 @section('title', '商品投稿ページ')
 
 {{-- admin.blade.phpの@yield('content')に以下のタグを埋め込む --}}
@@ -9,9 +9,9 @@
     <div class="container">
         <div class="row">
             <div class=box>
-            <div class="col-md-8 mx-auto">
-                <h1>商品</h1>
-                <form action="{{ action('admin\AdminTopController@create') }}" method="post" enctype="multipart/form-data">
+            <div class="col-md-8 mx-auto" style="width:600px;">
+                <h2>商品情報登録</h2>
+                <form action="{{ route('adminstock.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @if (count($errors) > 0)
                         <ul>

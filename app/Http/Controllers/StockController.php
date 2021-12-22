@@ -21,13 +21,16 @@ class StockController extends Controller
   
     public function myCart(Cart $cart)
     {
+       $quantity = $request->quantity;    
        $data = $cart->showCart();
+
        return view('stock.mycart',$data);  
     }
    
     public function addMycart(Request $request,Cart $cart)
     {
        $stock_id = $request->stock_id;
+       
        $message = $cart->addCart($stock_id);
        $data = $cart->showCart();
 
@@ -49,6 +52,7 @@ class StockController extends Controller
        $mail_data['user']=$user->name;
        $mail_data['checkout_items']=$cart->checkoutCart();
        Mail::to($user->email)->send(new Thanks($mail_data));
+       
        return view('stock.checkout');
    }
   

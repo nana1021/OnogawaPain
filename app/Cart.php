@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use App\Cart;
 
 class Cart extends Model
 {
@@ -20,13 +21,16 @@ class Cart extends Model
    {
        $user_id = Auth::id();
        $data['my_carts'] = $this->where('user_id',$user_id)->get();
+       $data['quantity'] = 
 
        $data['count']=0;
        $data['sum']=0;
        
        foreach($data['my_carts'] as $my_cart){
-           $data['count']++;
-           $data['sum'] += $my_cart->stock->price;
+        //   $data['count']++;
+        //   $data['sum'] += $my_cart->stock->price;
+        $data['count'] += $my_cart->quantity;
+        $data['sum'] += $my_cart->stock->price*$my_cart->quantity;
        }
        return $data;
    }

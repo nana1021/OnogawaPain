@@ -28,23 +28,14 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/checkout', 'StockController@checkout');
 });
 Route::get('/stock', 'StockController@index');
-
-
-
 //管理側
-Route::group(['middleware' => ['auth.admin']], function () {
-	Route::get('/admin', 'admin\AdminTopController@show');
-	Route::post('/admin/logout', 'admin\AdminLogoutController@logout');
-	Route::get('/admin/user_list', 'admin\ManageUserController@showUserList');
-	Route::get('/admin/user/{id}', 'admin\ManageUserController@showUserDetail');
-	Route::get('admin/create', 'admin\AdminTopController@add');
-	Route::post('/admin/create', 'admin\AdminTopController@create');
-	Route::get('/admin/index', 'admin\AdminTopController@index');
-	Route::get('/admin/edit', 'admin\AdminTopController@edit');
-	Route::post('/admin/edit', 'admin\AdminTopController@update');
-	Route::post('/admin/index', 'admin\AdminTopController@destroy');
+Route::group(['prefix' => 'admin' , 'middleware' => ['auth.admin']], function () {
+	Route::get('/top', 'admin\AdminTopController@show');
+	Route::post('/logout', 'admin\AdminLogoutController@logout');
+	Route::get('/user_list', 'admin\ManageUserController@showUserList');
+	Route::get('/user/{id}', 'admin\ManageUserController@showUserDetail');
 });
-
+Route::resource('adminstock', 'admin\AdminStockController',['except' => 'show'])->middleware('auth.admin');
 //管理側ログイン
 Route::get('/admin/login', 'admin\AdminLoginController@showLoginform');
 Route::post('/admin/login', 'admin\AdminLoginController@login');
