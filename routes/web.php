@@ -32,7 +32,8 @@ Route::get('/stock', 'StockController@index');
 Route::group(['prefix' => 'admin' , 'middleware' => 'auth.admin'], function () {
 	Route::get('/top', 'admin\AdminTopController@show');
 	Route::post('/logout', 'admin\AdminLogoutController@logout');
-	Route::get('/user_list', 'admin\ManageUserController@showUserList');
+	Route::get('/user_list', 'admin\ManageUserController@showUserList');	
+	Route::get('/user/{id}/delete', 'admin\ManageUserController@showUserDelete');
 	Route::get('/user/{id}', 'admin\ManageUserController@showUserDetail');
 });
 Route::resource('adminstock', 'admin\AdminStockController',['except' => 'show'])->middleware('auth.admin');
