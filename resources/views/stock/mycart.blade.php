@@ -37,7 +37,7 @@
                             
                             <td class="align-middle">
                                 数量
-                                <input class="align-middle" type="number" style="width:60px" name="quantity" class="form-control" min="0" value="{{ $my_cart->quantity　}}">
+                                <input class="align-middle" type="number" style="width:60px" name="quantity" class="form-control" min="0" value="{{ $my_cart->quantity }}">
 
                                 <input type="submit" value="変更">
                             </td>

@@ -22,8 +22,7 @@
                                 <th class="border-bottom border-dark" style="width:10%;"></th>
                             </tr>
                         </thead>
-                        <tbody>
-               
+
                         @foreach($stocks as $stock)
                             <tr class="text-center">
                                 <td class="align-middle">
@@ -35,49 +34,56 @@
                                 <td class="align-middle">    
                                     {{$stock->price}}円
                                 </td>
-                                <td class="align-middle">    
-                                    {{$stock->detail}} 
+                                <td class="align-middle">
+                                    @php
+                                    if(mb_strlen($stock->detail, 'UTF-8')>15){
+                                    	$detail= mb_substr($stock->detail, 0, 15, 'UTF-8');
+                                    	echo $detail.'……';
+                                    }else{
+                                    	echo $stock->detail;
+                                    }
+                                    @endphp    
                                 </td>   
-                                    <input type="hidden" name="id" value="{{ $stock->id }}">
-                                    <form class="btn-group mx-auto">
-                                        @csrf
-                                        <td class="align-middle">
-                                            <a href="{{ route('adminstock.edit',  $stock->id ) }}">
-                                            <button type="button" class="btn btn-outline-primary btn-sm"><i class="far fa-edit"></i> 編集</button></a>
-                                        <!-- Button trigger modal -->
-                                            <a><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal{{$stock->id}}"><i class="far fa-trash-alt"></i> 削除</button></a>
-                                        </td>
-                                        <!--Modal-->
-                                       <div class="modal fade" id="exampleModal{{$stock->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <input type="hidden" name="id" value="{{ $stock->id }}">
+                                
+                                <div class="btn-group mx-auto">
+                                    <td class="align-middle">
+                                        <a href="{{ route('adminstock.edit',  $stock->id ) }}">
+                                        <button type="button" class="btn btn-outline-primary btn-sm"><i class="far fa-edit"></i>編集</button></a>
+                                    <!-- Button trigger modal -->
+                                        <a><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal{{$stock->id}}"><i class="far fa-trash-alt"></i> 削除</button></a>
+                                    <!--Modal-->    
+                                        <div class="modal fade" id="exampleModal{{ $stock->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <form action="{{ route('adminstock.destroy', [ 'stock' => $stock->id ]) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
+                                                @csrf
+                                                @method('DELETE')
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">削除</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="text-primary">『{{ $stock->name }}』本当に削除しますか？</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                                                            <button type="submit" class="btn btn-danger">削除</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="modal-body">
-                                                      <p class="text-primary">『{{$stock->name}}』を本当に削除しますか？</p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-                                                      <button type="submit" class="btn btn-danger" name="" value="削除">削除</button>
-                                                    </div>
-                                                </div>
                                                 </form>
                                             </div>
                                         </div>
-                                    </form>
-                                </tr>
+                                    </td>
+                                </div>
+                            </tr>
                         @endforeach
-                          <a class="text-center" href="/admin/top">管理topへ</a>
+                          <!--<a class="text-center" href="/admin/top">管理topへ</a>-->
                     </table> 
-               </div>
-                    <div class="text-center" style="width: 200px;margin: 20px auto;">
+                </div>
+                    <div class="text-center" style="width: 200px; margin: 20px auto;">
                      {{  $stocks->links()}} 
                     </div>
             </div>

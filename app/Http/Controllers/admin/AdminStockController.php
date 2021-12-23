@@ -128,8 +128,9 @@ class AdminStockController extends Controller
     public function destroy($id)
     {
         // 該当するModelを取得し削除
-       $stock = Stock::find($id)->delete();
-       dd($stock);
-       return redirect('/adminstock')->with('message','商品情報が削除されました。');
+       $stock = Stock::find($id);
+       $stock->delete();
+    
+       return redirect('/adminstock')->with('message','『'.$stock['name'].'』'.'の商品情報が削除されました。');
     }
 }

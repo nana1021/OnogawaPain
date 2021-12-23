@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function(){
 });
 Route::get('/stock', 'StockController@index');
 //管理側
-Route::group(['prefix' => 'admin' , 'middleware' => ['auth.admin']], function () {
+Route::group(['prefix' => 'admin' , 'middleware' => 'auth.admin'], function () {
 	Route::get('/top', 'admin\AdminTopController@show');
 	Route::post('/logout', 'admin\AdminLogoutController@logout');
 	Route::get('/user_list', 'admin\ManageUserController@showUserList');
