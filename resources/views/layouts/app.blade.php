@@ -64,12 +64,12 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                    <a class="dropdown-item" href="{{ url('/mycart') }}">
+                                    <a class="dropdown-item" href="{{ url('stock/mycart') }}">
                                        カートを見る
                                    </a>
                                </div>
                            </li>
-                           <a href="{{ url('/mycart') }}" >
+                           <a href="{{ url('stock/mycart') }}" >
                                <img src="{{ asset('images/cart.png') }}" class="cart" >
                            </a>
                         @endguest

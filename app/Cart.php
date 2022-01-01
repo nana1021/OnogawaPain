@@ -5,9 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use App\Cart;
+use App\Stock;
+
 
 class Cart extends Model
 {
+ 
+ 
     protected $fillable = [
        'stock_id', 'user_id',
    ];
@@ -19,20 +23,26 @@ class Cart extends Model
    
    public function showCart()
    {
-       $user_id = Auth::id();
-       $data['my_carts'] = $this->where('user_id',$user_id)->get();
-       $data['quantity'] = 
-
-       $data['count']=0;
-       $data['sum']=0;
+        $user_id = Auth::id();
+        $data['my_carts'] = $this->where('user_id',$user_id)->get();
+        $stock_id = Auth::id();
+        // $ses_quantity = session()->get('quantity');
+        
+        $ses_data = session()->get('ses_data');
+        //セッションデータのなかのそれぞれのデータを抽出
+        $ses_stock_id = array_column($ses_data, 'ses_stock_id');
+        $ses_quantity = array_column($ses_data, 'ses_quantity');
+        dd($ses_data);
+        
+        $data['count']=0;   //ses_dataとは別のもの
+        $data['sum']=0;
        
-       foreach($data['my_carts'] as $my_cart){
-        //   $data['count']++;
-        //   $data['sum'] += $my_cart->stock->price;
-        $data['count'] += $my_cart->quantity;
-        $data['sum'] += $my_cart->stock->price*$my_cart->quantity;
-       }
-       return $data;
+        foreach($data['my_carts'] as $my_cart){
+          $data['count'] += $ses_quantity;
+           $data['sum'] += ($my_cart->stock->price)*$ses_quantity;
+        }
+        
+        return $data;
    }
    
    public function addCart($stock_id)

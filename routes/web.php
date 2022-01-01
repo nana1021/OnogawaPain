@@ -20,14 +20,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('scss', function(){
     return view('for-scss');
 });
+
 //ユーザー側
 Route::group(['middleware' => 'auth'], function(){
-	Route::get('/mycart', 'StockController@myCart');
-	Route::post('/mycart', 'StockController@addMycart');
-	Route::post('/cartdelete','StockController@deleteCart');
+	Route::get('stock/mycart', 'StockController@myCart');
+	Route::post('stock/mycart', 'StockController@addMycart');
+	Route::post('stock/cartdelete','StockController@deleteCart');
 	Route::post('/checkout', 'StockController@checkout');
 });
 Route::get('/stock', 'StockController@index');
+Route::get('/stock/{id}', 'StockController@show');
+Route::post('/stock/{id}', 'StockController@show');
+
 //管理側
 Route::group(['prefix' => 'admin' , 'middleware' => 'auth.admin'], function () {
 	Route::get('/top', 'admin\AdminTopController@show');

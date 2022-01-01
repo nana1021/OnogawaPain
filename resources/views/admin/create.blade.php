@@ -29,11 +29,19 @@
                     </div>
                     
                     <div class="form-group row">
-                        <label class="col-md-2" for="detail">商品説明</label>
+                        <label class="col-md-2" for="tagline">短い説明</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="tagline" rows="2">{{ old('tagline') }}</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-2" for="detail">詳細説明</label>
                         <div class="col-md-10">
                             <textarea class="form-control" name="detail" rows="5">{{ old('detail') }}</textarea>
                         </div>
                     </div>
+                    
                      <div class="form-group row">
                         <label class="col-md-2" for="price">価格</label>
                         <div class="col-md-10">

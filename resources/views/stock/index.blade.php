@@ -14,18 +14,11 @@
                                 {{$stock->name}} <br>
                                 {{$stock->price}}円<br>
                                 <img src="{{ asset('storage/image/' . $stock->image_path) }}" alt="" class="incart"><br>
-                                {{$stock->detail}} <br>
-                                <form action="mycart" method="post">
-                                    @csrf
-                                    <input type="hidden" name="stock_id" value="{{ $stock->id }}">
-                                    <table>
-                                        <tr>
-                                            <td><label>数量：</label></td>
-                                            <td><input type="number" style="width:60px" name="quantity" class="form-control" min="0" value="0"></td>
-                                            <td><input type="submit" value="カートに入れる"></td>
-                                        </tr>
-                                    </table>
-                                </form>
+                                {{$stock->tagline}} <br>
+                                <div>
+                                    <a href="{{ action('StockController@show', ['id' => $stock->id]) }}">
+                                    <button type="button" class="btn btn-outline-success btn-sm"> click more</button></a>
+                                </div>
                             </div>
                         </div>
                     @endforeach

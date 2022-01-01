@@ -10,7 +10,6 @@ class Stock extends Model
 
     public static $rules = array(
         'name' => 'required',
-        'detail' => 'required',
         'price' => 'required',
     );
    

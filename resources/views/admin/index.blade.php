@@ -15,9 +15,10 @@
                     <table class="table mt-5 ml-3 border-dark">
                         <thead>
                             <tr class="text-center">
-                                <th class="border-bottom border-dark" style="width:15%;">写真</th>
-                                <th class="border-bottom border-dark" style="width:13%;">商品名</th>
-                                <th class="border-bottom border-dark" style="width:10%;">値段</th>
+                                <th class="border-bottom border-dark" style="width:12%;">写真</th>
+                                <th class="border-bottom border-dark" style="width:10%;">商品名</th>
+                                <th class="border-bottom border-dark" style="width:7%;">値段</th>
+                                <th class="border-bottom border-dark" style="width:12%;">タグライン</th>
                                 <th class="border-bottom border-dark" style="width:15%;">説明</th>
                                 <th class="border-bottom border-dark" style="width:10%;"></th>
                             </tr>
@@ -33,6 +34,16 @@
                                 </td>    
                                 <td class="align-middle">    
                                     {{$stock->price}}円
+                                </td>
+                                <td class="align-middle">
+                                    @php
+                                    if(mb_strlen($stock->tagline, 'UTF-8')>10){
+                                    	$tagline= mb_substr($stock->tagline, 0, 10, 'UTF-8');
+                                    	echo $tagline.'……';
+                                    }else{
+                                    	echo $stock->tagline;
+                                    }
+                                    @endphp  
                                 </td>
                                 <td class="align-middle">
                                     @php
